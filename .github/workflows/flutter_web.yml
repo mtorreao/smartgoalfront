@@ -23,7 +23,9 @@ jobs:
       run: flutter config --enable-web
     - name: Resolver dependencias
       run: flutter pub get
-    - name: Rodar Testes
-      run: flutter test
+#     - name: Rodar Testes
+#       run: flutter test
     - name: Buildar um Flutter Web Release
       run: flutter build web --release
+    - name: Copiar build do Web para pasta do Github Pages
+      run: cv -r ./build/web/* ./docs
