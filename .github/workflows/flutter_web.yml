@@ -15,7 +15,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
       with: 
-        token: 'c480ff86c274683ac62de45e19ad3dec2a2c0aff'
+        token: ${{ secrets.PAT }}
     - name: Install dependencies
       run: flutter pub get
     - name: Build a Flutter Web Release
