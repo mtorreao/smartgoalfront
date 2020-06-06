@@ -28,4 +28,4 @@ jobs:
     - name: Buildar um Flutter Web Release
       run: flutter build web --release
     - name: Copiar build do Web para pasta do Github Pages
-      run: cv -r ./build/web/* ./docs
+      run: cp -r ./build/web/* ./docs
