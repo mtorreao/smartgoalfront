@@ -9,18 +9,18 @@ part of 'app_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$AppController on _AppControllerBase, Store {
-  final _$valueAtom = Atom(name: '_AppControllerBase.value');
+  final _$hasDrawerAtom = Atom(name: '_AppControllerBase.hasDrawer');
 
   @override
-  int get value {
-    _$valueAtom.reportRead();
-    return super.value;
+  bool get hasDrawer {
+    _$hasDrawerAtom.reportRead();
+    return super.hasDrawer;
   }
 
   @override
-  set value(int value) {
-    _$valueAtom.reportWrite(value, super.value, () {
-      super.value = value;
+  set hasDrawer(bool value) {
+    _$hasDrawerAtom.reportWrite(value, super.hasDrawer, () {
+      super.hasDrawer = value;
     });
   }
 
@@ -28,11 +28,22 @@ mixin _$AppController on _AppControllerBase, Store {
       ActionController(name: '_AppControllerBase');
 
   @override
-  void increment() {
+  void showDrawer() {
     final _$actionInfo = _$_AppControllerBaseActionController.startAction(
-        name: '_AppControllerBase.increment');
+        name: '_AppControllerBase.showDrawer');
     try {
-      return super.increment();
+      return super.showDrawer();
+    } finally {
+      _$_AppControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void hideDrawer() {
+    final _$actionInfo = _$_AppControllerBaseActionController.startAction(
+        name: '_AppControllerBase.hideDrawer');
+    try {
+      return super.hideDrawer();
     } finally {
       _$_AppControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -41,7 +52,7 @@ mixin _$AppController on _AppControllerBase, Store {
   @override
   String toString() {
     return '''
-value: ${value}
+hasDrawer: ${hasDrawer}
     ''';
   }
 }

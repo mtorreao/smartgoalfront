@@ -7,4 +7,9 @@ abstract class _TaskControllerBase with Store {
   
   var list = ObservableList<String>();
 
+  @action
+  void increment() {
+    
+  }
+
 }
