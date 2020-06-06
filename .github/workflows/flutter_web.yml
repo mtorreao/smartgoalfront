@@ -13,6 +13,8 @@ jobs:
       image:  cirrusci/flutter:beta
 
     steps:
+    - name: Permissao a pasta que o github actions usa
+      run: chmod -R 777 /__w/smartgoalfront/smartgoalfront
     - uses: actions/checkout@v2
       with: 
         token: ${{ secrets.PAT }}
