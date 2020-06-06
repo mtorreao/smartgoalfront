@@ -15,7 +15,8 @@ jobs:
     - uses: actions/setup-java@v1
       with:
         java-version: '12.x'
-    - uses: subosito/flutter-action@v1.3.2
+    - name: Inicializando Flutter
+      uses: subosito/flutter-action@v1.3.2
       with:
         flutter-version: '1.18.0-11.1.pre' 
         channel: 'beta'
@@ -29,3 +30,13 @@ jobs:
       run: flutter build web --release
     - name: Copiar build do Web para pasta do Github Pages
       run: cp -r ./build/web/* ./docs
+    - name: Publicar na branch de master
+      uses: github-actions-x/commit@v2.6
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        push-branch: 'master'
+        commit-message: 'Deploy Web'
+        force-add: 'true'
+        files: .
+        name: Github Actions
+        email: mtorreao1@gmail.com
