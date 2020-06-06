@@ -1,8 +1,8 @@
 import 'package:SmartGoalFront/app/app_controller.dart';
-import 'package:flutter_modular/flutter_modular.dart';
-import 'package:flutter/material.dart';
 import 'package:SmartGoalFront/app/app_widget.dart';
-import 'package:SmartGoalFront/app/modules/home/home_module.dart';
+import 'package:SmartGoalFront/app/modules/task/task_module.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class AppModule extends MainModule {
   @override
@@ -12,7 +12,7 @@ class AppModule extends MainModule {
 
   @override
   List<Router> get routers => [
-        Router(Modular.initialRoute, module: HomeModule()),
+        Router(Modular.initialRoute, module: TaskModule()),
       ];
 
   @override
