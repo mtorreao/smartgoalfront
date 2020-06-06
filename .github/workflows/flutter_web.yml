@@ -10,14 +10,21 @@ jobs:
   build:
     runs-on: ubuntu-latest
     container:
-      image:  cirrusci/flutter:beta
+      image:  google/dart:beta
 
     steps:
-    - name: Permissao a pasta que o github actions usa
-      run: chmod -R 777 /__w/smartgoalfront/smartgoalfront
+    - name: set environment variables
+      uses: allenevans/set-env@v1.0.0
+      with:
+          FLUTTER_HOME: '${HOME}/sdks/flutter'
+          FLUTTER_VERSION: '1.18.0-11.1.pre'
+          FLUTTER_ROOT: '${HOME}/sdks/flutter'
+          PATH: '${PATH}:${FLUTTER_HOME}/bin:${FLUTTER_HOME}/bin/cache/dart-sdk/bin'
+    - name: Clone flutter
+      run: git clone --branch ${FLUTTER_VERSION} https://github.com/flutter/flutter.git ${FLUTTER_HOME}
+    - name: Accept Licences
+      run: yes | flutter doctor --android-licenses && flutter doctor
     - uses: actions/checkout@v2
-      with: 
-        token: ${{ secrets.PAT }}
     - name: Install dependencies
       run: flutter pub get
     - name: Build a Flutter Web Release
