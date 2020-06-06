@@ -9,25 +9,22 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    container:
-      image:  google/dart:beta
-
+    
     steps:
-    - name: set environment variables
-      uses: allenevans/set-env@v1.0.0
+    - uses: actions/setup-java@v1
       with:
-          FLUTTER_HOME: '${HOME}/sdks/flutter'
-          FLUTTER_VERSION: '1.18.0-11.1.pre'
-          FLUTTER_ROOT: '${HOME}/sdks/flutter'
-          PATH: '${PATH}:${FLUTTER_HOME}/bin:${FLUTTER_HOME}/bin/cache/dart-sdk/bin'
-    - name: Clone flutter
-      run: git clone --branch ${FLUTTER_VERSION} https://github.com/flutter/flutter.git ${FLUTTER_HOME}
-    - name: Accept Licences
-      run: yes | flutter doctor --android-licenses && flutter doctor
+        java-version: '12.x'
+    - uses: subosito/flutter-action@v1.3.2
+      with:
+        flutter-version: '1.18.0-11.1.pre' 
+        channel: 'beta'
+    - run: flutter config --enable-web
+    - run: flutter pub get
+    - run: flutter test
     - uses: actions/checkout@v2
     - name: Install dependencies
       run: flutter pub get
     - name: Build a Flutter Web Release
       run: flutter build web --release
-    - name: Copiar conteudo da pasta Web
-      run: cp -r ./build/web/* ./docs
+#     - name: Copiar conteudo da pasta Web
+#       run: cp -r ./build/web/* ./docs
