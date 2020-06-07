@@ -37,6 +37,6 @@ jobs:
         push-branch: 'master'
         commit-message: 'Deploy Web'
         force-add: 'true'
-        files: .
+        files: ./build/web/*
         name: Github Actions
         email: mtorreao1@gmail.com
