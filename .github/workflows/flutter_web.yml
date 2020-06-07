@@ -50,8 +50,8 @@ jobs:
     - name: Buildar um Flutter Web Release
       run: flutter build web --release
     - name: Copiar build do Web para pasta do Github Pages
-      run: cp -r ./build/web/* ./docs
-    - name: Publicar na branch de master
+      run: cp -R ./build/web/* ./docs
+    - name: Publicar projecto Web na branch de master
       uses: github-actions-x/commit@v2.6
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}

@@ -1,8 +1,11 @@
 import 'package:SmartGoalFront/app/core/widgets/layout_widget.dart';
-import 'package:SmartGoalFront/app/core/widgets/sidenav_widget.dart';
+import 'package:SmartGoalFront/app/modules/task/pages/task_form/task_form_controller.dart';
+import 'package:SmartGoalFront/app/modules/task/pages/task_form/task_form_page.dart';
+import 'package:SmartGoalFront/app/modules/task/pages/task_list/task_list_controller.dart';
+import 'package:SmartGoalFront/app/modules/task/pages/task_list/task_list_page.dart';
+import 'package:SmartGoalFront/app/modules/task/repositories/task_repository.dart';
+import 'package:SmartGoalFront/app/modules/task/store/task_store.dart';
 import 'package:SmartGoalFront/app/modules/task/task_controller.dart';
-import 'package:SmartGoalFront/app/modules/task/task_list_page.dart';
-import 'package:SmartGoalFront/app/modules/task/task_repository.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -10,6 +13,9 @@ import 'package:flutter_modular/flutter_modular.dart';
 class TaskModule extends ChildModule {
   @override
   List<Bind> get binds => [
+        Bind((i) => TaskFormController(i.get())),
+        Bind((i) => TaskStore()),
+        Bind((i) => TaskListController()),
         Bind((i) => TaskRepository()),
         Bind((i) => TaskController()),
       ];
@@ -20,12 +26,17 @@ class TaskModule extends ChildModule {
           '/',
           child: (context, args) => LayoutWidget(
             TaskListPage(),
-            secondColumn: Container(
-              child: Text('Coluna 2'),
+            floatingActionButton: FloatingActionButton(
+              onPressed: () {
+                Modular.link.pushNamed('/new');
+              },
+              child: Icon(Icons.add),
             ),
-            sideNav: SideNavWidget(),
-            drawer: Drawer(),
           ),
         ),
+        Router(
+          '/new',
+          child: (context, args) => LayoutWidget(TaskFormPage()),
+        )
       ];
 }

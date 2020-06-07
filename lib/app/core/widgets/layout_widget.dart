@@ -9,6 +9,7 @@ class LayoutWidget extends StatefulWidget {
   final Widget sideNav;
   final AppBar appBar;
   final Drawer drawer;
+  final FloatingActionButton floatingActionButton;
 
   LayoutWidget(
     this.page, {
@@ -16,6 +17,7 @@ class LayoutWidget extends StatefulWidget {
     this.appBar,
     this.sideNav,
     this.drawer,
+    this.floatingActionButton,
   });
 
   @override
@@ -62,7 +64,7 @@ class _LayoutWidgetState extends State<LayoutWidget> {
           } else if (hasSecondColumn) {
             columnWidth = maxWidth / 2;
           } else {
-            columnWidth = 900;
+            columnWidth = 700;
           }
           if (hasSideNav && hasSecondColumn) {
             hasSecondColumn = maxWidth - sideNavWidth - columnWidth > 600;
@@ -73,7 +75,7 @@ class _LayoutWidgetState extends State<LayoutWidget> {
           body = Row(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               if (hasSideNav)
                 Container(
@@ -93,18 +95,11 @@ class _LayoutWidgetState extends State<LayoutWidget> {
           );
         }
 
-        if (isMobile && hasDrawer) {
-          return Scaffold(
-            appBar: appBar,
-            drawer: widget.drawer,
-            body: body,
-          );
-        } else {
-          return Scaffold(
-            appBar: appBar,
-            body: body,
-          );
-        }
+        return Scaffold(
+          appBar: appBar,
+          body: body,
+          floatingActionButton: widget.floatingActionButton,
+        );
       },
     );
   }
