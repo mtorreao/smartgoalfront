@@ -22915,7 +22915,7 @@ T.C3.prototype={}
 Z.pd.prototype={
 aC:function(){return new Z.Be(C.o)}}
 Z.Be.prototype={
-H:function(a){return L.xq("Hello World!",null)}}
+H:function(a){return L.xq("Hello Man\xe9",null)}}
 E.xn.prototype={
 gnx:function(){var t=u.z
 return H.b([T.Qr(new E.KG(),t),T.Qr(new E.KH(),t)],u.uh)},
