@@ -9,6 +9,21 @@ part of 'task_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$TaskStore on _TaskStoreBase, Store {
+  final _$idAtom = Atom(name: '_TaskStoreBase.id');
+
+  @override
+  String get id {
+    _$idAtom.reportRead();
+    return super.id;
+  }
+
+  @override
+  set id(String value) {
+    _$idAtom.reportWrite(value, super.id, () {
+      super.id = value;
+    });
+  }
+
   final _$titleAtom = Atom(name: '_TaskStoreBase.title');
 
   @override
@@ -67,6 +82,7 @@ mixin _$TaskStore on _TaskStoreBase, Store {
   @override
   String toString() {
     return '''
+id: ${id},
 title: ${title},
 checked: ${checked}
     ''';

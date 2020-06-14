@@ -17,18 +17,20 @@ class TaskModelHive extends TypeAdapter<TaskModel> {
       for (var i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return TaskModel(
-      title: fields[0] as String,
-      checked: fields[1] as bool,
-    );
+      title: fields[1] as String,
+      checked: fields[2] as bool,
+    )..id = fields[0] as String;
   }
 
   @override
   void write(BinaryWriter writer, TaskModel obj) {
     writer
-      ..writeByte(2)
-      ..writeByte(0)
-      ..write(obj.title)
+      ..writeByte(3)
       ..writeByte(1)
-      ..write(obj.checked);
+      ..write(obj.title)
+      ..writeByte(2)
+      ..write(obj.checked)
+      ..writeByte(0)
+      ..write(obj.id);
   }
 }

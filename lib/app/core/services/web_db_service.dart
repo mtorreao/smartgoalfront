@@ -1,26 +1,25 @@
+import 'package:SmartGoalFront/app/core/interfaces/data_model_interface.dart';
 import 'package:SmartGoalFront/app/core/interfaces/database_interface.dart';
 import 'package:SmartGoalFront/app/core/util/database_event.dart';
 import 'package:SmartGoalFront/app/modules/task/models/task_model.dart';
 import 'package:hive/hive.dart';
 
-class WebDBService<T> implements IDatabase<T> {
+class WebDBService<T extends IDataModel> implements IDatabase<T> {
   Box<T> box;
 
   @override
   Future add(model) {
-    box?.add(model);
+    box?.put(model.id, model);
   }
 
   @override
   Future delete(String id) {
-    // TODO: implement delete
-    throw UnimplementedError();
+    return box?.delete(id);
   }
 
   @override
   Future get(String id) {
-    // TODO: implement get
-    throw UnimplementedError();
+    box.get(id);
   }
 
   @override
@@ -30,8 +29,7 @@ class WebDBService<T> implements IDatabase<T> {
 
   @override
   Future update(model) {
-    // TODO: implement update
-    throw UnimplementedError();
+    box.put(model.id, model);
   }
 
   @override
@@ -48,5 +46,8 @@ class WebDBService<T> implements IDatabase<T> {
   }
 
   @override
-  Stream<DatabaseEvent<T>> watch() => box.watch().map((event) => event.value);
+  Stream<DatabaseEvent<T>> watch() => box.watch().map((event) => DatabaseEvent()
+    ..deleted = event.deleted
+    ..value = event.value
+    ..id = event.key);
 }

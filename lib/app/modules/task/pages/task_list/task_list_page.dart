@@ -29,6 +29,7 @@ class _TaskListPageState
             final item = list[index];
             return ListTile(
               title: Text(item.title),
+              trailing: IconButton(icon: Icon(Icons.delete), onPressed: () => controller.delete(item.id)),
             );
           });
     });

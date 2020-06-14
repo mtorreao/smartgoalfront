@@ -1,6 +1,7 @@
 import 'package:SmartGoalFront/app/core/interfaces/data_model_interface.dart';
 
-abstract class DatabaseEvent<T extends IDataModel> {
+class DatabaseEvent<T extends IDataModel> {
   bool deleted;
+  String id;
   IDataModel value;
 }

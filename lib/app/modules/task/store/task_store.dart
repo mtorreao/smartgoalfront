@@ -8,13 +8,16 @@ class TaskStore = _TaskStoreBase with _$TaskStore;
 
 abstract class _TaskStoreBase with Store implements IStoreModel {
   @observable
+  String id;
+  @observable
   String title = "";
   @observable
-  bool checked = false;
+  bool checked;
 
   _TaskStoreBase({
+    this.id,
     this.title,
-    this.checked,
+    this.checked = false,
   });
 
   @action
@@ -29,11 +32,12 @@ abstract class _TaskStoreBase with Store implements IStoreModel {
 
   @override
   String toString() {
-    return 'title=$title, checked=$checked';
+    return 'id=$id, title=$title, checked=$checked';
   }
 
   TaskModel toDataModel() => TaskModel(
         checked: this.checked,
         title: this.title,
+        id: this.id,
       );
 }

@@ -25,9 +25,16 @@ abstract class _TaskListControllerBase extends Disposable with Store {
   Future init() async {
     await _repository.init();
     sub = this._repository.watch().listen((event) {
-      print(event);
-      tasks.add(event.value.toStore());
+      if (event.deleted) {
+        tasks.removeWhere((element) => element.id == event.id);
+      } else {
+        tasks.add(event.value.toStore());
+      }
     });
+  }
+
+  Future<void> delete(String id) async {
+    await _repository.delete(id);
   }
 
   void dispose() {
