@@ -14,6 +14,12 @@ class TaskListPage extends StatefulWidget {
 class _TaskListPageState
     extends ModularState<TaskListPage, TaskListController> {
   @override
+  void initState() {
+    super.initState();
+    controller.init();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Observer(builder: (_) {
       final list = controller.tasks.toList();

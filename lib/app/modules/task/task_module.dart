@@ -1,3 +1,4 @@
+import 'package:SmartGoalFront/app/app_module.dart';
 import 'package:SmartGoalFront/app/core/widgets/layout_widget.dart';
 import 'package:SmartGoalFront/app/modules/task/pages/task_form/task_form_controller.dart';
 import 'package:SmartGoalFront/app/modules/task/pages/task_form/task_form_page.dart';
@@ -5,7 +6,6 @@ import 'package:SmartGoalFront/app/modules/task/pages/task_list/task_list_contro
 import 'package:SmartGoalFront/app/modules/task/pages/task_list/task_list_page.dart';
 import 'package:SmartGoalFront/app/modules/task/repositories/task_repository.dart';
 import 'package:SmartGoalFront/app/modules/task/store/task_store.dart';
-import 'package:SmartGoalFront/app/modules/task/task_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -13,11 +13,10 @@ import 'package:flutter_modular/flutter_modular.dart';
 class TaskModule extends ChildModule {
   @override
   List<Bind> get binds => [
-        Bind((i) => TaskFormController(i.get())),
         Bind((i) => TaskStore()),
-        Bind((i) => TaskListController()),
-        Bind((i) => TaskRepository()),
-        Bind((i) => TaskController()),
+        Bind((i) => TaskFormController(i.get())),
+        Bind((i) => TaskListController(i.get())),
+        Bind((i) => TaskRepository(AppModule.to.get())),
       ];
 
   @override

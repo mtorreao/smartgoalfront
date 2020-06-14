@@ -15,32 +15,28 @@ class _TaskFormPageState
     extends ModularState<TaskFormPage, TaskFormController> {
   @override
   Widget build(BuildContext context) {
-    return Observer(builder: (_) {
-      final task = controller.task;
-      return Form(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Observer(builder: (_) {
-              return TextFormField(
-                onChanged: task.setTitle,
-                initialValue: task.title,
-              );
-            }),
-            SizedBox(
-              height: 16,
-            ),
-            RaisedButton(
-              onPressed: () {
-                print(controller.task);
-
-                
-              },
-              child: Text('Save'),
-            ),
-          ],
-        ),
-      );
-    });
+    return Form(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Observer(builder: (_) {
+            return TextFormField(
+              onChanged: controller.task.setTitle,
+              initialValue: controller.task.title,
+            );
+          }),
+          SizedBox(
+            height: 16,
+          ),
+          RaisedButton(
+            onPressed: () {
+              controller.save();
+              Modular.link.pop();
+            },
+            child: Text('Save'),
+          ),
+        ],
+      ),
+    );
   }
 }
