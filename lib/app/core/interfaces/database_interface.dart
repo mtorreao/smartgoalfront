@@ -8,6 +8,6 @@ abstract class IDatabase<T extends IDataModel> extends Disposable {
   Iterable<T> list();
   Stream<DatabaseEvent<T>> watch();
   Future add(T model);
+  Future<T> get(String id);
   Future update(T model);
-  Future get(String id);
 }

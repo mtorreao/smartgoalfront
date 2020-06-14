@@ -13,7 +13,7 @@ class AppModule extends MainModule {
   @override
   List<Bind> get binds => [
         Bind((i) => AppController()),
-        Bind((i) => WebDBService<TaskModel>(), singleton: true),
+        Bind((i) => WebDBService<TaskModel>()),
       ];
 
   @override

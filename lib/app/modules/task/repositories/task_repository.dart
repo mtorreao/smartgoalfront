@@ -30,7 +30,8 @@ class TaskRepository implements IRepository<TaskModel> {
   Stream<DatabaseEvent<TaskModel>> watch() => this.dbContext.watch();
 
   @override
-  Future<void> delete(String id) {
-    return this.dbContext.delete(id);
-  }
+  Future<void> delete(String id) => this.dbContext.delete(id);
+
+  @override
+  Future<void> update(TaskModel model) => this.dbContext.update(model);
 }

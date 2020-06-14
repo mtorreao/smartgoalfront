@@ -18,7 +18,7 @@ abstract class _TaskListControllerBase extends Disposable with Store {
 
   _TaskListControllerBase(this._repository) {
     autorun((rx) {
-      print(tasks);
+      print("Hello Autorun");
     });
   }
 
@@ -27,10 +27,17 @@ abstract class _TaskListControllerBase extends Disposable with Store {
     sub = this._repository.watch().listen((event) {
       if (event.deleted) {
         tasks.removeWhere((element) => element.id == event.id);
+      } else if (tasks.any((element) => element.id == event.id)) {
+        var index = tasks.indexWhere((element) => element.id == event.id);
+        tasks.removeAt(index);
+        tasks.insert(index, event.value.toStore());
       } else {
         tasks.add(event.value.toStore());
       }
     });
+    _repository.list().toList()
+      ..sort()
+      ..forEach((e) => tasks.add(e.toStore()));
   }
 
   Future<void> delete(String id) async {
@@ -39,6 +46,12 @@ abstract class _TaskListControllerBase extends Disposable with Store {
 
   void dispose() {
     sub?.cancel();
+  }
+
+  void toggleChecked(int index, bool checked) {
+    var task = tasks.elementAt(index);
+    task.checked = !checked;
+    _repository.update(task.toDataModel());
   }
 
   ObservableList<TaskStore> tasks = ObservableList<TaskStore>();

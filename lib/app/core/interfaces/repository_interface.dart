@@ -8,4 +8,5 @@ abstract class IRepository<T extends IDataModel> extends Disposable {
   Iterable<T> list();
   Stream<DatabaseEvent<T>> watch();
   Future<void> delete(String id);
+  Future<void> update(T model);
 }

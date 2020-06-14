@@ -6,7 +6,7 @@ import 'package:uuid/uuid.dart';
 part 'task_model.g.dart';
 
 @HiveType(typeId: 0, adapterName: "TaskModelHive")
-class TaskModel extends BaseModel implements IDataModel {
+class TaskModel extends BaseModel implements IDataModel, Comparable<TaskModel> {
   @HiveField(1)
   String title;
   @HiveField(2)
@@ -32,7 +32,22 @@ class TaskModel extends BaseModel implements IDataModel {
         title: this.title,
         id: this.id,
       );
+
+  @override
+  String toString() => '''{
+        Id: $id, 
+        Title: $title, 
+        Checked: $checked
+    }
+    ''';
+
+  @override
+  int compareTo(other) {
+    return this.checked == other.checked ? 0 : this.checked ? -1 : 1;
+  }
 }
+
+extension BooleanExtensions on bool {}
 
 abstract class BaseModel {
   @HiveField(0)
@@ -40,7 +55,7 @@ abstract class BaseModel {
 
   BaseModel({this.id}) {
     if (this.id == null) {
-      id = Uuid().v4().toString();
+      this.id = Uuid().v4().toString();
     }
   }
 }
