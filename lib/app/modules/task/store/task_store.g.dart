@@ -54,6 +54,21 @@ mixin _$TaskStore on _TaskStoreBase, Store {
     });
   }
 
+  final _$dueDateAtom = Atom(name: '_TaskStoreBase.dueDate');
+
+  @override
+  DateTime get dueDate {
+    _$dueDateAtom.reportRead();
+    return super.dueDate;
+  }
+
+  @override
+  set dueDate(DateTime value) {
+    _$dueDateAtom.reportWrite(value, super.dueDate, () {
+      super.dueDate = value;
+    });
+  }
+
   final _$_TaskStoreBaseActionController =
       ActionController(name: '_TaskStoreBase');
 
@@ -63,6 +78,17 @@ mixin _$TaskStore on _TaskStoreBase, Store {
         name: '_TaskStoreBase.setTitle');
     try {
       return super.setTitle(value);
+    } finally {
+      _$_TaskStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setDueDate(DateTime date) {
+    final _$actionInfo = _$_TaskStoreBaseActionController.startAction(
+        name: '_TaskStoreBase.setDueDate');
+    try {
+      return super.setDueDate(date);
     } finally {
       _$_TaskStoreBaseActionController.endAction(_$actionInfo);
     }
@@ -84,7 +110,8 @@ mixin _$TaskStore on _TaskStoreBase, Store {
     return '''
 id: ${id},
 title: ${title},
-checked: ${checked}
+checked: ${checked},
+dueDate: ${dueDate}
     ''';
   }
 }

@@ -1,13 +1,11 @@
+import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
-import 'package:dio/dio.dart';
-
-import 'package:SmartGoalFront/app/modules/task/repositories/task_repository.dart';
 
 class MockClient extends Mock implements Dio {}
 
 void main() {
-  TaskRepository repository;
+  // TaskRepository repository;
   // MockClient client;
 
   setUp(() {

@@ -21,6 +21,7 @@ environment:
   sdk: ">=2.8.0 <3.0.0"
 
 dependencies:
+  intl: ^0.16.1
   hive_flutter: any
   uuid: ^2.1.0
   hive: ^1.4.1+1

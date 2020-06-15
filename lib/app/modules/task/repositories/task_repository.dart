@@ -19,9 +19,7 @@ class TaskRepository implements IRepository<TaskModel> {
   }
 
   @override
-  void add(model) {
-    this.dbContext.add(model);
-  }
+  Future add(model) => this.dbContext.add(model);
 
   @override
   Iterable<TaskModel> list() => dbContext.list();

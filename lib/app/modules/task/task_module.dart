@@ -35,7 +35,19 @@ class TaskModule extends ChildModule {
         ),
         Router(
           '/new',
-          child: (context, args) => LayoutWidget(TaskFormPage()),
+          child: (context, args) => LayoutWidget(
+            TaskFormPage(),
+            appBar: AppBar(
+              title: Text('New Task'),
+            ),
+            floatingActionButton: FloatingActionButton.extended(
+              onPressed: Modular.get<TaskFormController>().save,
+              label: Text('Save'),
+              icon: Icon(
+                Icons.save,
+              ),
+            ),
+          ),
         )
       ];
 }

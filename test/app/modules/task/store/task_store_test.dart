@@ -1,8 +1,6 @@
+import 'package:SmartGoalFront/app/modules/task/task_module.dart';
 import 'package:flutter_modular/flutter_modular_test.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-import 'package:SmartGoalFront/app/modules/task/store/task_store.dart';
-import 'package:SmartGoalFront/app/modules/task/task_module.dart';
 
 void main() {
   initModule(TaskModule());

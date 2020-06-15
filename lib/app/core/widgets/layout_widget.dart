@@ -49,7 +49,6 @@ class _LayoutWidgetState extends State<LayoutWidget> {
         final hasSideNav = widget.sideNav != null;
         var hasSecondColumn = widget.secondColumn != null;
         final double sideNavWidth = hasSecondColumn ? 200 : 300;
-        final hasDrawer = widget.drawer != null;
 
         Widget body;
 

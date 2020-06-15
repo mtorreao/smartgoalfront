@@ -1,7 +1,7 @@
 import 'package:SmartGoalFront/app/core/interfaces/data_model_interface.dart';
+import 'package:SmartGoalFront/app/core/models/base_model.dart';
 import 'package:SmartGoalFront/app/modules/task/store/task_store.dart';
 import 'package:hive/hive.dart';
-import 'package:uuid/uuid.dart';
 
 part 'task_model.g.dart';
 
@@ -11,51 +11,43 @@ class TaskModel extends BaseModel implements IDataModel, Comparable<TaskModel> {
   String title;
   @HiveField(2)
   bool checked;
+  @HiveField(3)
+  DateTime updatedAt;
+  @HiveField(4)
+  DateTime createdAt;
+  @HiveField(5)
+  DateTime dueDate;
 
   TaskModel({
     this.title,
     this.checked = false,
     String id,
+    this.createdAt,
+    this.dueDate,
+    this.updatedAt,
   }) : super(id: id);
-
-  factory TaskModel.fromJson(Map<String, dynamic> json) {
-    return TaskModel(
-        //field: json[''],
-        );
-  }
-
-  Map<String, dynamic> toJson() => {};
 
   @override
   TaskStore toStore() => TaskStore(
         checked: this.checked,
         title: this.title,
         id: this.id,
+        createdAt: this.createdAt,
+        dueDate: this.dueDate,
+        updatedAt: this.updatedAt,
       );
 
   @override
-  String toString() => '''{
-        Id: $id, 
-        Title: $title, 
-        Checked: $checked
-    }
-    ''';
+  String toString() => '''
+    {
+      id=$id, 
+      title=$title, 
+      checked=$checked,
+      createdAt=$createdAt,
+      updatedAt=$updatedAt,
+      dueDate=$dueDate
+    }''';
 
   @override
-  int compareTo(other) {
-    return this.checked == other.checked ? 0 : this.checked ? -1 : 1;
-  }
-}
-
-extension BooleanExtensions on bool {}
-
-abstract class BaseModel {
-  @HiveField(0)
-  String id;
-
-  BaseModel({this.id}) {
-    if (this.id == null) {
-      this.id = Uuid().v4().toString();
-    }
-  }
+  int compareTo(other) => this.title.compareTo(other.title);
 }

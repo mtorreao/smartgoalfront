@@ -7,19 +7,13 @@ class WebDBService<T extends IDataModel> implements IDatabase<T> {
   Box<T> box;
 
   @override
-  Future add(T model) {
-    return box?.put(model.id, model);
-  }
+  Future add(T model) => box?.put(model.id, model);
 
   @override
-  Future delete(String id) {
-    return box?.delete(id);
-  }
+  Future delete(String id) => box?.delete(id);
 
   @override
-  Future<T> get(String id) {
-    return Future.value(box.get(id));
-  }
+  Future<T> get(String id) => Future.value(box.get(id));
 
   @override
   Iterable<T> list() => box.values;
@@ -29,7 +23,7 @@ class WebDBService<T extends IDataModel> implements IDatabase<T> {
 
   @override
   void dispose() {
-    // box?.close();
+    box?.close();
   }
 
   @override

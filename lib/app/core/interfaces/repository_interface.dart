@@ -4,7 +4,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 abstract class IRepository<T extends IDataModel> extends Disposable {
   Future init();
-  void add(T model);
+  Future add(T model);
   Iterable<T> list();
   Stream<DatabaseEvent<T>> watch();
   Future<void> delete(String id);

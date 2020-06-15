@@ -1,7 +1,6 @@
 import 'package:flutter_modular/flutter_modular_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:SmartGoalFront/app/modules/task/task_list_controller.dart';
 import 'package:SmartGoalFront/app/modules/task/task_module.dart';
 
 void main() {
